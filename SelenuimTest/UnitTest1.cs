@@ -69,7 +69,7 @@ namespace SeleniumBingTests
                     driver = new InternetExplorerDriver();
                     break;
                 default:
-                    driver = new ChromeDriver();
+                   driver = new ChromeDriver(Environment.GetEnvironmentVariable("ChromeWebDriver"));
                     break;
             }
 
@@ -78,7 +78,7 @@ namespace SeleniumBingTests
         [TestCleanup()]
         public void MyTestCleanup()
         {
-            //driver.Quit();
+            driver.Quit();
         }
     }
 }
