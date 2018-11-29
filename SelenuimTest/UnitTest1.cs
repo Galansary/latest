@@ -1,83 +1,35 @@
-﻿using System;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.IE;
 
-namespace SeleniumBingTests
+namespace WebDriverExtensions
 {
-    /// <summary>
-    /// Summary description for MySeleniumTests
-    /// </summary>
-    [TestClass]
-    public class MySeleniumTests
+    public static class WebElementExtensions
     {
-        private TestContext testContextInstance;
-        private IWebDriver driver;
-        private string appURL;
-
-        public MySeleniumTests()
+        public static bool ElementIsPresent(this IWebDriver driver, By by)
         {
+            try
+            {
+                return driver.FindElement(by).Displayed;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
+    }
 
+    [TestClass]
+    public class ExtensionUnitTests
+    {
         [TestMethod]
-        [TestCategory("Chrome")]
-        public void TheBingSearchTest()
+        public void FindVisibleElements()
         {
-            driver.Navigate().GoToUrl(appURL + "/");
-            //ChromeWebElement element = driver.FindElement(By.ClassName(Control-label));
-            //driver.Quit();
-            //driver.FindElement(By.ClassName("")).SendKeys("Azure Pipelines");
-            //driver.FindElement(By.Id("sb_form_go")).Click();
-            //driver.FindElement(By.XPath("//ol[@id='b_results']/li/h2/a/strong[3]")).Click();
-            //Assert.IsTrue(driver.Title.Contains("Azure Pipelines"), "Verified title of the page");
-        }
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-        [TestInitialize()]
-        public void SetupTest()
-        {
-            appURL = "http://webapptest-bpcalc.azurewebsites.net";
-
-            string browser = "Chrome";
-            switch (browser)
-            {
-                case "Chrome":
-                    driver = new ChromeDriver(Environment.GetEnvironmentVariable("ChromeWebDriver"));
-                    break;
-                case "Firefox":
-                    driver = new FirefoxDriver();
-                    break;
-                case "IE":
-                    driver = new InternetExplorerDriver();
-                    break;
-                default:
-                   driver = new ChromeDriver(Environment.GetEnvironmentVariable("ChromeWebDriver"));
-                    break;
-            }
-
-        }
-
-        [TestCleanup()]
-        public void MyTestCleanup()
-        {
+            var driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("http://webapptest-bpcalc.azurewebsites.net/");
+            Assert.AreEqual(true, driver.ElementIsPresent(By.XPath("/html/body/div/h4"))); // Visible Works
+            Assert.AreEqual(true, driver.ElementIsPresent(By.XPath("/html/body/nav/div/div[1]/a"))); // Visible Works
+          
             driver.Quit();
         }
     }
