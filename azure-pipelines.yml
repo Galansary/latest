@@ -30,8 +30,3 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: AzureRmWebAppDeployment@3
-  inputs:
-    azureSubscription: 'Free Trial (bb4d8023-c5e0-4312-9461-d006d1d78847)'
-    WebAppName: 'TestWepApp'
-    Package: $(System.ArtifactsDirectory)/**/*.zip
