@@ -27,7 +27,8 @@ namespace SeleniumBingTests
         public void TheBingSearchTest()
         {
             driver.Navigate().GoToUrl(appURL + "/");
-            driver.Quit();
+            //ChromeWebElement element = driver.FindElement(By.ClassName(Control-label));
+            //driver.Quit();
             //driver.FindElement(By.ClassName("")).SendKeys("Azure Pipelines");
             //driver.FindElement(By.Id("sb_form_go")).Click();
             //driver.FindElement(By.XPath("//ol[@id='b_results']/li/h2/a/strong[3]")).Click();
@@ -53,7 +54,7 @@ namespace SeleniumBingTests
         [TestInitialize()]
         public void SetupTest()
         {
-            appURL = "http://webapptest-bpcalc.azurewebsites.net/ ";
+            appURL = "http://webapptest-bpcalc.azurewebsites.net";
 
             string browser = "Chrome";
             switch (browser)
@@ -77,7 +78,7 @@ namespace SeleniumBingTests
         [TestCleanup()]
         public void MyTestCleanup()
         {
-            driver.Quit();
+            //driver.Quit();
         }
     }
 }
