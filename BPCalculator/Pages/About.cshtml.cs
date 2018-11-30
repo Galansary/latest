@@ -12,7 +12,7 @@ namespace BPCalculator.Pages
 
         public void OnGet()
         {
-            Message = "Your application description page.";
+            Message = "this Application inputs your Blood Presure Measures and Calculate your Blood Pressure Category ";
         }
     }
 }
