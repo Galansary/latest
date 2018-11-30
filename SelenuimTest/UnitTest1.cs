@@ -39,7 +39,14 @@ namespace SeleniumBingTests
             Assert.AreEqual(true, driver.FindElement(By.XPath("/html/body/div/h4")).Displayed); // Visible Works headers BPcalculator
             Assert.AreEqual(true, driver.FindElement(By.XPath("/html/body/nav/div/div[1]/a")).Displayed); // Visible Works headers in Black
         }
-
+        [TestMethod]
+        [TestCategory("IE")]
+        public void theIETest()
+        {
+            driver.Navigate().GoToUrl(appURL + "/");
+            Assert.AreEqual(true, driver.FindElement(By.XPath("/html/body/div/h4")).Displayed); // Visible Works headers BPcalculator
+            Assert.AreEqual(true, driver.FindElement(By.XPath("/html/body/nav/div/div[1]/a")).Displayed); // Visible Works headers in Black
+        }
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
